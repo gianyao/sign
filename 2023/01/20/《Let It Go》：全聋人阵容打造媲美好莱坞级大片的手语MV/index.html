@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>
+    《Let It Go》：全聋人阵容打造媲美好莱坞级大片的手语MV
+     · 手语视点
+  </title>
+  <link rel="icon" href="https://img.yaojian.cc/logo.png" sizes="32x32">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+  <div class="app">
+    
+
+    <!-- Main Content -->
+    <!-- 返回栏 -->
+<div class="backbar">
+  <a class="back-btn" href="/">←</a>
+  <img src="https://img.yaojian.cc/logo.png" alt="" style="width:28px;height:28px;border-radius:6px;object-fit:cover">
+  <span class="back-label">返回首页</span>
+  <span class="follow-us" style="margin-left:auto;font-size:.7rem;color:rgba(0,0,0,0.4);background:#F0F0F5;padding:.15rem .5rem;border-radius:100px;position:relative;cursor:pointer">关注我们
+    <div class="qr-popup">
+      <img src="https://img.yaojian.cc/img_5c6a4454356b.jpg" alt="二维码">
+      <span>扫码关注</span>
+    </div>
+  </span>
+</div>
+
+<!-- 视频播放器 -->
+<div class="player-wrapper">
+  
+    <div class="video-cover" id="videoCover">
+      <img src="https://img.yaojian.cc/picgo/LetIt000.jpg" alt="" onerror="this.style.display='none'">
+      <div class="play-overlay">
+        <div class="play-btn">▶</div>
+        <div class="play-hint">点击播放</div>
+      </div>
+    </div>
+    <video id="mainPlayer" controls playsinline style="display:none">
+      <source id="videoSource" src="https://img.yaojian.cc/video/Let-It-Go_compressed.mp4" type="video/mp4">
+    </video>
+  
+</div>
+
+<!-- 分类 -->
+
+  <div class="cat">音乐</div>
+
+<h1 class="title">《Let It Go》：全聋人阵容打造媲美好莱坞级大片的手语MV</h1>
+
+<!-- stats -->
+<div class="stats">
+  <span>📅 2023</span>
+  <span>⏱️ 04:30</span>
+</div>
+
+<!-- 标签 -->
+
+  <div class="tags">
+    
+      <a class="tag" href="/tags/手语/">手语</a>
+    
+      <a class="tag" href="/tags/音乐/">音乐</a>
+    
+      <a class="tag" href="/tags/MV/">MV</a>
+    
+      <a class="tag" href="/tags/聋人文化/">聋人文化</a>
+    
+      <a class="tag" href="/tags/冰雪奇缘/">冰雪奇缘</a>
+    
+  </div>
+
+
+<!-- 正文 -->
+
+  <div class="ctitle">📝 影片信息</div>
+  <div class="desc">
+    <p>谁说电影只是听人的游戏？这支《Let It Go》手语版MV给出了最有力的反击。</p>
+<p>令人惊叹的是，这部作品的核心创作团队实现了100%的聋人配置。从导演到摄影，从剪辑到特效，他们用媲美好莱坞大片的工业水准证明：听力缺失，绝不是通往艺术殿堂的阻碍。</p>
+
+  </div>
+
+
+<!-- 上下篇导航 -->
+
+  <div class="more-title">🎬 更多影片</div>
+  <div class="more-list">
+    
+      <a class="more-item" href="/2026/01/01/约翰·斯图尔特与杨军辉的深度对谈/">
+        <div class="more-thumb">
+          <img src="https://img.yaojian.cc/picgo/yjh0000.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="md">16:32</span>
+        </div>
+        <div class="more-body">
+          <div class="mt">约翰·斯图尔特与杨军辉的深度对谈</div>
+          <div class="ms">← 上一篇</div>
+        </div>
+      </a>
+    
+    
+      <a class="more-item" href="/2022/06/16/American Authors - Pride（手语MV）/">
+        <div class="more-thumb">
+          <img src="https://img.yaojian.cc/picgo/3463626222.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="md">03:30</span>
+        </div>
+        <div class="more-body">
+          <div class="mt">American Authors - Pride（手语MV）</div>
+          <div class="ms">下一篇 →</div>
+        </div>
+      </a>
+    
+  </div>
+
+
+<!-- 底部版权 -->
+<div class="footer">
+  <span>© 2026 手语视点</span>
+</div>
+
+<script>
+(function(){
+  var SIGN_SERVER = 'https://video.yaojian.cc';
+
+  // 点击弹出二维码（兼容手机端）
+  var fu = document.querySelector('.follow-us');
+  if (fu) {
+    fu.addEventListener('click', function(e) {
+      if (!matchMedia('(hover:hover)').matches) {
+        this.classList.toggle('active');
+        e.stopPropagation();
+      }
+    });
+  }
+  document.addEventListener('click', function() {
+    var el = document.querySelector('.follow-us.active');
+    if (el) el.classList.remove('active');
+  });
+
+  // 点击封面播放
+  var cover = document.getElementById('videoCover');
+  var player = document.getElementById('mainPlayer');
+  var source = document.getElementById('videoSource');
+  if (cover && player && source) {
+    var rawUrl = source.getAttribute('src');
+    // 异步获取签名后的视频链接
+    var signedUrl = rawUrl; // fallback
+    fetch(SIGN_SERVER + '/sign?url=' + encodeURIComponent(rawUrl) + '&expire=3600')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        signedUrl = data.url || rawUrl;
+        source.src = signedUrl;
+        player.load();
+      })
+      .catch(function(){
+        // 签名失败，使用原始 URL
+        source.src = rawUrl;
+        player.load();
+      });
+
+    cover.addEventListener('click', function(){
+      // 如果还没设置签名 URL
+      if (!source.src) {
+        source.src = signedUrl;
+        player.load();
+      }
+      cover.style.display = 'none';
+      player.style.display = 'block';
+      player.play().catch(function(){});
+    });
+    player.addEventListener('ended', function(){
+      cover.style.display = 'block';
+      player.style.display = 'none';
+    });
+  }
+})();
+</script>
+
+
+    
+  </div>
+
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>
