@@ -7,7 +7,7 @@
     《This is Normal》：谁来定义正常？
      · 手语视点
   </title>
-  <link rel="icon" href="https://img.yaojian.cc/logo.png" sizes="32x32">
+  <link rel="icon" href="/img/logo.png" sizes="32x32">
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -22,12 +22,13 @@
   <a class="back-btn" href="/">←</a>
   <img src="https://img.yaojian.cc/logo.png" alt="" style="width:28px;height:28px;border-radius:6px;object-fit:cover">
   <span class="back-label">返回首页</span>
-  <span class="follow-us" style="margin-left:auto;font-size:.7rem;color:rgba(0,0,0,0.4);background:#F0F0F5;padding:.15rem .5rem;border-radius:100px;position:relative;cursor:pointer">关注我们
-    <div class="qr-popup">
+  <details class="follow-details" style="margin-left:auto;position:relative">
+    <summary class="follow-summary" style="font-size:.7rem;color:rgba(0,0,0,0.4);background:#F0F0F5;padding:.15rem .5rem;border-radius:100px;cursor:pointer;list-style:none;user-select:none">关注我们</summary>
+    <div class="qr-popup" style="position:absolute;top:100%;right:0;margin-top:.5rem;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:10px;padding:.6rem;box-shadow:0 8px 30px rgba(0,0,0,0.12);display:flex;flex-direction:column;align-items:center;gap:.3rem;z-index:100">
       <img src="https://img.yaojian.cc/img_5c6a4454356b.jpg" alt="二维码">
-      <span>扫码关注</span>
+      <span style="font-size:.65rem;color:rgba(0,0,0,0.45);white-space:nowrap">扫码关注</span>
     </div>
-  </span>
+  </details>
 </div>
 
 <!-- 视频播放器 -->
@@ -40,7 +41,7 @@
         <div class="play-hint">点击播放</div>
       </div>
     </div>
-    <video id="mainPlayer" controls playsinline style="display:none">
+    <video id="mainPlayer" controls playsinline style="display:none" width="100%">
       <source id="videoSource" src="https://img.yaojian.cc/video/normal.mp4" type="video/mp4">
     </video>
   
@@ -73,20 +74,38 @@
   </div>
 
 
+<!-- 描述 -->
+
+  <div class="desc">
+    <p>当"治愈"成为一场冒险，聋人身份认同的深刻拷问</p>
+  </div>
+
+
 <!-- 正文 -->
 
-  <div class="ctitle">📝 影片信息</div>
-  <div class="desc">
+  <div class="ctitle">📝 文章详情</div>
+  <article class="post-content markdown-body">
     <p>荣获2014年西雅图聋人电影节最佳剧情片的《This is normal》，以其尖锐的议题直击聋人群体最敏感的神经。影片主角格温是一位失聪青年，她选择接受一项实验性的听力恢复手术。然而，这场看似通往”正常”的旅程，却将她推向了悬崖边缘——在获得新听觉的同时，她面临着失去原有社群、文化乃至自我身份的危机。</p>
 <p>“为了变成听人，放弃曾经的自己，真的值得吗？”这不仅是格温的困惑，更是对整个聋人社群的灵魂拷问。它迫使我们重新审视”健全”与”残缺”的定义，以及身份认同背后的沉重代价。</p>
 
-  </div>
+  </article>
 
 
 <!-- 上下篇导航 -->
 
-  <div class="more-title">🎬 更多影片</div>
+  <div class="ctitle" style="margin-top:1.5rem">📖 相关文章</div>
   <div class="more-list">
+    
+      <a class="more-item" href="/2026/06/23/在手语里，看见一个社群的历史与未来/">
+        <div class="more-thumb">
+          <img src="https://img.yaojian.cc/picgo/04-community-future-player-cover-640x356.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="md">20:55</span>
+        </div>
+        <div class="more-body">
+          <div class="mt">在手语里，看见一个社群的历史与未来</div>
+          <div class="ms">← 上一篇</div>
+        </div>
+      </a>
     
     
       <a class="more-item" href="/2026/01/01/约翰·斯图尔特与杨军辉的深度对谈/">
@@ -110,61 +129,18 @@
 
 <script>
 (function(){
-  var SIGN_SERVER = 'https://video.yaojian.cc';
-
-  // 点击弹出二维码（兼容手机端）
-  var fu = document.querySelector('.follow-us');
-  if (fu) {
-    fu.addEventListener('click', function(e) {
-      if (!matchMedia('(hover:hover)').matches) {
-        this.classList.toggle('active');
-        e.stopPropagation();
-      }
-    });
-  }
-  document.addEventListener('click', function() {
-    var el = document.querySelector('.follow-us.active');
-    if (el) el.classList.remove('active');
-  });
-
-  // 点击封面播放
   var cover = document.getElementById('videoCover');
   var player = document.getElementById('mainPlayer');
-  var source = document.getElementById('videoSource');
-  if (cover && player && source) {
-    var rawUrl = source.getAttribute('src');
-    // 异步获取签名后的视频链接
-    var signedUrl = rawUrl; // fallback
-    fetch(SIGN_SERVER + '/sign?url=' + encodeURIComponent(rawUrl) + '&expire=3600')
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        signedUrl = data.url || rawUrl;
-        source.src = signedUrl;
-        player.load();
-      })
-      .catch(function(){
-        // 签名失败，使用原始 URL
-        source.src = rawUrl;
-        player.load();
-      });
-
+  if (cover && player) {
     cover.addEventListener('click', function(){
-      // 如果还没设置签名 URL
-      if (!source.src) {
-        source.src = signedUrl;
-        player.load();
-      }
       cover.style.display = 'none';
       player.style.display = 'block';
       player.play().catch(function(){});
     });
-    player.addEventListener('ended', function(){
-      cover.style.display = 'block';
-      player.style.display = 'none';
-    });
   }
 })();
 </script>
+
 
 
     

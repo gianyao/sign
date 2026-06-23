@@ -7,7 +7,7 @@
     约翰·斯图尔特与杨军辉的深度对谈
      · 手语视点
   </title>
-  <link rel="icon" href="https://img.yaojian.cc/logo.png" sizes="32x32">
+  <link rel="icon" href="/img/logo.png" sizes="32x32">
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -22,12 +22,13 @@
   <a class="back-btn" href="/">←</a>
   <img src="https://img.yaojian.cc/logo.png" alt="" style="width:28px;height:28px;border-radius:6px;object-fit:cover">
   <span class="back-label">返回首页</span>
-  <span class="follow-us" style="margin-left:auto;font-size:.7rem;color:rgba(0,0,0,0.4);background:#F0F0F5;padding:.15rem .5rem;border-radius:100px;position:relative;cursor:pointer">关注我们
-    <div class="qr-popup">
+  <details class="follow-details" style="margin-left:auto;position:relative">
+    <summary class="follow-summary" style="font-size:.7rem;color:rgba(0,0,0,0.4);background:#F0F0F5;padding:.15rem .5rem;border-radius:100px;cursor:pointer;list-style:none;user-select:none">关注我们</summary>
+    <div class="qr-popup" style="position:absolute;top:100%;right:0;margin-top:.5rem;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:10px;padding:.6rem;box-shadow:0 8px 30px rgba(0,0,0,0.12);display:flex;flex-direction:column;align-items:center;gap:.3rem;z-index:100">
       <img src="https://img.yaojian.cc/img_5c6a4454356b.jpg" alt="二维码">
-      <span>扫码关注</span>
+      <span style="font-size:.65rem;color:rgba(0,0,0,0.45);white-space:nowrap">扫码关注</span>
     </div>
-  </span>
+  </details>
 </div>
 
 <!-- 视频播放器 -->
@@ -40,7 +41,7 @@
         <div class="play-hint">点击播放</div>
       </div>
     </div>
-    <video id="mainPlayer" controls playsinline style="display:none">
+    <video id="mainPlayer" controls playsinline style="display:none" width="100%">
       <source id="videoSource" src="https://img.yaojian.cc/picgo/yjhfw.mp4" type="video/mp4">
     </video>
   
@@ -71,19 +72,26 @@
   </div>
 
 
+<!-- 描述 -->
+
+  <div class="desc">
+    <p>比较中英两国聋人教育体系差异的珍贵样本</p>
+  </div>
+
+
 <!-- 正文 -->
 
-  <div class="ctitle">📝 影片信息</div>
-  <div class="desc">
+  <div class="ctitle">📝 文章详情</div>
+  <article class="post-content markdown-body">
     <p>本文所推介的短片源自英国慈善机构”Deaf Way”发起的”The Signed Voices Project”（签约之声项目）。该项目受英格兰国家遗产基金（National Lottery Heritage Fund）资助，旨在通过手语影像记录英格兰西北部聋人群体的历史文化与生活叙事。</p>
 <p>片中，约翰·斯图尔特与杨军辉分享了各自截然不同的求学之路，为我们提供了比较中英两国聋人教育体系差异的珍贵样本。本片资源由项目负责人Steven Wynne惠允授权，发布于”手语视点”平台。同时，特别鸣谢杨军辉老师倾力完成的中文译制，此举极大地降低了认知门槛，有助于国内学界与公众对聋人高等教育的现状产生更深刻的洞察。</p>
 
-  </div>
+  </article>
 
 
 <!-- 上下篇导航 -->
 
-  <div class="more-title">🎬 更多影片</div>
+  <div class="ctitle" style="margin-top:1.5rem">📖 相关文章</div>
   <div class="more-list">
     
       <a class="more-item" href="/2026/01/15/《This-is-Normal》：谁来定义正常？/">
@@ -119,61 +127,18 @@
 
 <script>
 (function(){
-  var SIGN_SERVER = 'https://video.yaojian.cc';
-
-  // 点击弹出二维码（兼容手机端）
-  var fu = document.querySelector('.follow-us');
-  if (fu) {
-    fu.addEventListener('click', function(e) {
-      if (!matchMedia('(hover:hover)').matches) {
-        this.classList.toggle('active');
-        e.stopPropagation();
-      }
-    });
-  }
-  document.addEventListener('click', function() {
-    var el = document.querySelector('.follow-us.active');
-    if (el) el.classList.remove('active');
-  });
-
-  // 点击封面播放
   var cover = document.getElementById('videoCover');
   var player = document.getElementById('mainPlayer');
-  var source = document.getElementById('videoSource');
-  if (cover && player && source) {
-    var rawUrl = source.getAttribute('src');
-    // 异步获取签名后的视频链接
-    var signedUrl = rawUrl; // fallback
-    fetch(SIGN_SERVER + '/sign?url=' + encodeURIComponent(rawUrl) + '&expire=3600')
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        signedUrl = data.url || rawUrl;
-        source.src = signedUrl;
-        player.load();
-      })
-      .catch(function(){
-        // 签名失败，使用原始 URL
-        source.src = rawUrl;
-        player.load();
-      });
-
+  if (cover && player) {
     cover.addEventListener('click', function(){
-      // 如果还没设置签名 URL
-      if (!source.src) {
-        source.src = signedUrl;
-        player.load();
-      }
       cover.style.display = 'none';
       player.style.display = 'block';
       player.play().catch(function(){});
     });
-    player.addEventListener('ended', function(){
-      cover.style.display = 'block';
-      player.style.display = 'none';
-    });
   }
 })();
 </script>
+
 
 
     
