@@ -156,10 +156,9 @@ img{max-width:100%;height:auto}
 .video-gate{
   position:absolute;inset:0;z-index:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:.42rem;padding:1.2rem;background:rgba(7,8,18,.78);color:#fff;text-align:center;
+  gap:.42rem;padding:1.2rem 1.2rem 2.7rem;background:rgba(7,8,18,.78);color:#fff;text-align:center;
   backdrop-filter:blur(3px);
 }
-.gate-lock{font-size:1.3rem;line-height:1;margin:0 0:.15rem}
 .gate-title{margin:0;font-size:.92rem;font-weight:700;line-height:1.7}
 .gate-qr{width:108px!important;height:108px!important;object-fit:cover;border-radius:8px;background:#fff;padding:4px;margin:.15rem 0 .4rem}
 .gate-form{display:flex;gap:.35rem;width:min(290px,100%)}
