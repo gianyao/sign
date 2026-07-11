@@ -152,6 +152,22 @@ img{max-width:100%;height:auto}
 }
 .video-cover:active .play-btn{transform:scale(.95)}
 .play-hint{font-size:.75rem;color:rgba(255,255,255,.7);margin-top:.5rem}
+.video-locked{cursor:default}
+.video-gate{
+  position:absolute;inset:0;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1rem;background:rgba(7,8,18,.78);color:#fff;text-align:center;
+  backdrop-filter:blur(3px);
+}
+.gate-lock{font-size:1.25rem;line-height:1;margin-bottom:.4rem}
+.gate-title{margin:0 0:.55rem;font-size:.9rem;font-weight:700;line-height:1.45}
+.gate-qr{width:104px!important;height:104px!important;object-fit:cover;border-radius:8px;background:#fff;padding:4px;margin:0 0:.6rem}
+.gate-form{display:flex;gap:.35rem;width:min(290px,100%)}
+.gate-form input{min-width:0;flex:1;border:1px solid rgba(255,255,255,.35);border-radius:7px;background:rgba(255,255,255,.96);padding:.48rem .55rem;color:#1A1A2E;font-size:.78rem;outline:none}
+.gate-form input:focus{border-color:#A78BFA;box-shadow:0 0 0 2px rgba(167,139,250,.3)}
+.gate-form button{border:0;border-radius:7px;background:#8B5CF6;color:#fff;padding:.48rem .65rem;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.gate-error{margin:.4rem 0 0;color:#FECACA;font-size:.7rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .player-wrapper video{width:100%;display:block;background:#000;}
 
 .cat{

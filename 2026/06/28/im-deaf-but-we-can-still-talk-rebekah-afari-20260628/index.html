@@ -40,12 +40,22 @@
 <!-- 视频播放器 -->
 <div class="player-wrapper">
   
-    <div class="video-cover" id="videoCover">
+    
+    <div class="video-cover video-locked" id="videoCover">
       <img src="https://img.yaojian.cc/wechat/rebekah-afari-20260628/rebekah-afari-video-cover-640x356.jpg?v=20260628" alt="" onerror="this.style.display='none'">
-      <div class="play-overlay">
-        <div class="play-btn">▶</div>
-        <div class="play-hint">点击播放</div>
-      </div>
+      
+        <div class="video-gate" id="videoGate">
+          <div class="gate-lock" aria-hidden="true">🔒</div>
+          <p class="gate-title">关注手语视点公众号获取观看密码</p>
+          <img class="gate-qr" src="https://img.yaojian.cc/picgo/erweima.jpg" alt="手语视点公众号二维码">
+          <form class="gate-form" id="videoGateForm">
+            <label class="sr-only" for="videoPassword">观看密码</label>
+            <input id="videoPassword" type="password" inputmode="text" autocomplete="current-password" placeholder="输入观看密码" required>
+            <button type="submit">解锁观看</button>
+          </form>
+          <p class="gate-error" id="videoGateError" role="alert" hidden>密码不正确，请重新输入。</p>
+        </div>
+      
     </div>
     <video id="mainPlayer" controls playsinline style="display:none" width="100%">
       <source id="videoSource" src="https://img.yaojian.cc/videos/deaf-talk-rebekah-afari-20260628-720p.mp4" type="video/mp4">
@@ -184,16 +194,49 @@
 (function(){
   var cover = document.getElementById('videoCover');
   var player = document.getElementById('mainPlayer');
-  if (cover && player) {
+  var gate = document.getElementById('videoGate');
+  var passwordHash = 'bfae43960ea3e31df8a44953c87227c514b1c32e57358d50d3bbc7b78bb68bae';
+  function showPlayer(){
+    cover.style.display = 'none';
+    player.style.display = 'block';
+    player.play().catch(function(){});
+  }
+  if (cover && player && gate && passwordHash) {
+    var form = document.getElementById('videoGateForm');
+    var input = document.getElementById('videoPassword');
+    var error = document.getElementById('videoGateError');
+    if (sessionStorage.getItem('sign-video-unlocked') === passwordHash) {
+      showPlayer();
+      return;
+    }
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      var value = input.value.trim();
+      if (!window.crypto || !window.crypto.subtle) {
+        error.textContent = '当前浏览器不支持密码校验，请升级浏览器后重试。';
+        error.hidden = false;
+        return;
+      }
+      window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function(buffer){
+        var hash = Array.prototype.map.call(new Uint8Array(buffer), function(byte){
+          return byte.toString(16).padStart(2, '0');
+        }).join('');
+        if (hash === passwordHash) {
+          sessionStorage.setItem('sign-video-unlocked', passwordHash);
+          showPlayer();
+        } else {
+          error.hidden = false;
+          input.select();
+        }
+      });
+    });
+  } else if (cover && player) {
     cover.addEventListener('click', function(){
-      cover.style.display = 'none';
-      player.style.display = 'block';
-      player.play().catch(function(){});
+      showPlayer();
     });
   }
 })();
 </script>
-
 
 
     
