@@ -161,7 +161,7 @@ img{max-width:100%;height:auto}
 }
 .gate-title{margin:0;font-size:.92rem;font-weight:700;line-height:1.7}
 .gate-qr{width:108px!important;height:108px!important;object-fit:cover;border-radius:8px;background:#fff;padding:4px;margin:.15rem 0 .4rem}
-.gate-form{display:flex;gap:.35rem;width:min(290px,100%)}
+.gate-form{display:flex;gap:.35rem;width:min(250px,100%)}
 .gate-form input{min-width:0;flex:1;border:1px solid rgba(255,255,255,.35);border-radius:7px;background:rgba(255,255,255,.96);padding:.48rem .55rem;color:#1A1A2E;font-size:.78rem;outline:none}
 .gate-form input:focus{border-color:#A78BFA;box-shadow:0 0 0 2px rgba(167,139,250,.3)}
 .gate-form button{border:0;border-radius:7px;background:#8B5CF6;color:#fff;padding:.48rem .65rem;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
