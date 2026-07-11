@@ -193,12 +193,31 @@
     player.style.display = 'block';
     player.play().catch(function(){});
   }
+  function unlockCover(){
+    if (cover.dataset.unlocked === 'true') return;
+    cover.dataset.unlocked = 'true';
+    gate.style.display = 'none';
+    var overlay = document.createElement('div');
+    overlay.className = 'play-overlay';
+    var button = document.createElement('div');
+    button.className = 'play-btn';
+    button.setAttribute('aria-hidden', 'true');
+    button.textContent = '▶';
+    var hint = document.createElement('div');
+    hint.className = 'play-hint';
+    hint.textContent = '点击播放';
+    overlay.appendChild(button);
+    overlay.appendChild(hint);
+    cover.appendChild(overlay);
+    cover.classList.remove('video-locked');
+    cover.addEventListener('click', showPlayer, { once: true });
+  }
   if (cover && player && gate && passwordHash) {
     var form = document.getElementById('videoGateForm');
     var input = document.getElementById('videoPassword');
     var error = document.getElementById('videoGateError');
     if (sessionStorage.getItem('sign-video-unlocked') === passwordHash) {
-      showPlayer();
+      unlockCover();
       return;
     }
     form.addEventListener('submit', function(event){
@@ -215,7 +234,7 @@
         }).join('');
         if (hash === passwordHash) {
           sessionStorage.setItem('sign-video-unlocked', passwordHash);
-          showPlayer();
+          unlockCover();
         } else {
           error.hidden = false;
           input.select();
