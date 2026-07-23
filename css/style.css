@@ -1,5 +1,5 @@
 /* ========================================
-   手语视点 (ShouYuShiDian) Hexo Theme
+   手语星河 Hexo Theme
    白底深文 · 手机优先 · 视频卡片风格
    ======================================== */
 
@@ -122,7 +122,7 @@ img{max-width:100%;height:auto}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
-/* --- 文章页（手语影像馆播放页风格） --- */
+/* --- 文章页（手语星河播放页风格） --- */
 
 .player-wrapper{
   position:relative;background:#000;

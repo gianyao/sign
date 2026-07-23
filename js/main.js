@@ -1,4 +1,4 @@
-// 手语视点 Hexo Theme - 辅助脚本
+// 手语星河 Hexo Theme - 辅助脚本
 (function(){
   // 图片懒加载
   var imgs = document.querySelectorAll('img[loading="lazy"]');
